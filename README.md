@@ -39,7 +39,7 @@
   <p align="center">
     This repo contains the portfolio project for CSC507 - Foundations of Operating Systems
     <br />
-    <a href="https://github.com/adrialarmijo/CSC507"><strong>Explore the docs »</strong></a>
+    <a href="https://adrial-armijo.atlassian.net/wiki/spaces/FOOS/overview"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/adrialarmijo/CSC507">View Demo</a>
