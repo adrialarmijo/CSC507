@@ -174,7 +174,7 @@ See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Adrial - [@music_surrounds](https://twitter.com/music_surrounds)
+Adrial Armijo- [LinkedIn](https://www.linkedin.com/in/adrial-armijo/)
 
 Project Link: [https://github.com/adrialarmijo/CSC507](https://github.com/adrialarmijo/CSC507)
 
