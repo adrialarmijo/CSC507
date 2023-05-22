@@ -31,7 +31,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/adrialarmijo/CSC507">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/logo.png" alt="Logo">
   </a>
 
 <h3 align="center">Foundations of Operating Systems Master Class</h3>
