@@ -122,18 +122,17 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/adrialarmijo/CSC507.git
    ```
-3. Install NPM packages
+2. Install Python 3
    ```sh
-   npm install
+   npm install Python
    ```
-4. Enter your API in `config.js`
+3. Run `main.py`
    ```js
-   const API_KEY = 'ENTER YOUR API';
+   ./main.py
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -195,7 +194,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Your Name - [@twitter_handle](https://twitter.com/music_surrounds)
 
 Project Link: [https://github.com/adrialarmijo/CSC507](https://github.com/adrialarmijo/CSC507)
 
