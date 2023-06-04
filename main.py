@@ -2,7 +2,7 @@ import rt_processing
 
 def main():
     # ------- Change Me -----------
-    n = 75000
+    n = 5000
     # -----------------------------
     
     file_1 = "nums.txt"

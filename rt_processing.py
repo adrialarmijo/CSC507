@@ -28,8 +28,8 @@ def call_bin_packing(file_name):
 def schedule_tasks(file_name, chunk_size):
     threads = []
     for i in range(chunk_size):
-        thread_target = bin_packing.process_chunky_data(file_name, chunk_size)
-        t = threading.Thread(thread_target)
+        thread_target = bin_packing.process_chunky_data
+        t = threading.Thread(target=thread_target, args=(file_name, chunk_size))
         threads.append(t)
         t.start()
     for t in threads:
@@ -39,10 +39,10 @@ def combine_files(file_name, chunks, exercise_num):
     output = ""
     base_name = os.path.splitext(file_name)[0]
     for i in range(chunks):
-        with open((base_name, f'_chunk_{i}.txt'), 'r') as f:
+        with open((base_name + f'_chunk_{i}.txt'), 'r') as f:
             chunk_out = f.read()
             output += chunk_out
-    with open('combined_output_{exercise_num}.txt', 'w') as o:
+    with open(f'combined_output_{exercise_num}.txt', 'w') as o:
         o.write(output)
 
 # standard_run runs a static process, calling the first-fit algorithm from the
@@ -63,7 +63,7 @@ def standard_run(file_name):
 def split_by_chunk_size(file_name, chunks, exercise_num):
     start_time = time.time()
     schedule_tasks(file_name, chunks)
-    #combine_files(file_name, chunks, exercise_num)
+    combine_files(file_name, chunks, exercise_num)
     end_time = time.time()
     elapsed_time = end_time - start_time
     print("Exercise complete. Time elapsed is", elapsed_time, "second(s)") 

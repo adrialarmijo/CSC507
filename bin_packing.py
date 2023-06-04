@@ -30,7 +30,7 @@ def best_fit(items, bin_cap):
 
 # First-Fit Algorithm
 def first_fit(items, bin_cap):
-    # print("items:", items, "bin_cap:", bin_cap) debug
+    # print("items:", items, "bin_cap:", bin_cap) # debug
     bins = []
     for item in items:
         isPlaced = False
@@ -51,34 +51,40 @@ def get_data_from_file(filename):
             if bin_cap_str.isdigit():
                 bin_cap = int(bin_cap_str)
             else:
-                # print("Invalid bin capacity: not a valid integer") bug-catcher
+                # print("Invalid bin capacity: not a valid integer") # bug-catcher
                 return None, None
             items = [int(line.strip()) for line in lines[1:]]
         else:
             print("File is empty")
             return None, None
+    if bin_cap is None or len(items) == 0:
+        print("Invalid bin capacity or no items found in the file")
+        return None, None
     return items, bin_cap
     
 
 # Write the chunk to a file
 def chunkify_me_capn(chunk_size, file_size, base_name, fin):
-    # print("chunk size:", chunk_size) debug
+    # print("chunk size:", chunk_size) # debug
+    
     for i in range(chunk_size):
         starting_i = i * chunk_size
         next_end_i = (i + 1) * chunk_size
         end_i = next_end_i if next_end_i < file_size else file_size
         chunk = fin[starting_i:end_i]
-        name = base_name + "_chunk_"+ str(i) + ".txt"
+        name = base_name + "_chunk_"+ str(i) + ".txt"     
         with open(name, 'w') as o:
             o.write(chunk)   
     
     
 def prepare_chunks(filename, chunk_size):
-    # print("Preparing", filename, "for chunkification...") debug
+    # print("Preparing", filename, "for chunkification...") # debug
     with open(filename, 'r') as f:
         base_name = os.path.splitext(filename)[0]
         fin = f.read()
         file_size = len(fin)
+        # print("File size:", file_size) # debug
+        # print("Chunk size:", chunk_size) # debug
         chunkify_me_capn(chunk_size, file_size, base_name, fin)
     
 
@@ -94,6 +100,9 @@ def process_chunky_data(filename, chunk_size):
     for i in range(chunk_size):
         chunk_file_name = base_name + "_chunk_"+ str(i) + ".txt"
         items, bin_cap = get_data_from_file(chunk_file_name)
+        print("Chunk file:", chunk_file_name) # debug
+        print("Items:", items) # debug
+        print("Bin Capacity:", bin_cap) # debug
         if items is not None and bin_cap is not None:
             all_items.extend(items)
             all_bin_cap = bin_cap
