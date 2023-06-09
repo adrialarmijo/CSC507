@@ -1,7 +1,7 @@
 # This python module mimics processing data within the OS into static and heap memory.
 # Using the bin-packing problem, both the best-fit and first-fit algorithms are tested.
-# In most cases, the first-fit algorithm performs better, with a worst-case time complexity
-# of O(n^2). Best-fit has its uses, but is currently not optimal for this project.
+# In most cases, the next-fit algorithm performs better, with a worst-case time complexity
+# of O(nb^2). First-fit & Best-fit has its uses, but is currently not optimal for this project.
 
 # More on the bin-packing problem can be found in the ACM Journal:
 # Goemans, M. X., & Rothvoss, T. (2020). Polynomiality for Bin Packing with a Constant Number of Item Types. 
@@ -43,9 +43,24 @@ def first_fit(items, bin_cap):
             bins.append([item])
     return bins
 
+# Next-Fit Algorithm
+def next_fit(items, bin_cap):
+    bins = []
+    current_bin = []
+    for item in items:
+        if sum(current_bin) + item <= bin_cap:
+            current_bin.append(item)
+        else:
+            bins.append(current_bin)
+            current_bin = [item]
+    bins.append(current_bin)
+    return bins
+
+
 def get_data_from_file(filename):
     with open(filename, 'r') as f:
         lines = f.readlines()
+        print("lines = ",)
         if len(lines) > 0:
             bin_cap_str = lines[0].strip()
             if bin_cap_str.isdigit():
@@ -90,7 +105,7 @@ def prepare_chunks(filename, chunk_size):
 
 def process_data(filename):
     items, bin_cap = get_data_from_file(filename)
-    first_fit(items, bin_cap)
+    next_fit(items, bin_cap)
 
 def process_chunky_data(filename, chunk_size):
     prepare_chunks(filename, chunk_size)
@@ -100,22 +115,22 @@ def process_chunky_data(filename, chunk_size):
     for i in range(chunk_size):
         chunk_file_name = base_name + "_chunk_"+ str(i) + ".txt"
         items, bin_cap = get_data_from_file(chunk_file_name)
-        print("Chunk file:", chunk_file_name) # debug
-        print("Items:", items) # debug
-        print("Bin Capacity:", bin_cap) # debug
+        # print("Chunk file:", chunk_file_name) # debug
+        # print("Items:", items) # debug
+        # print("Bin Capacity:", bin_cap) # debug
         if items is not None and bin_cap is not None:
             all_items.extend(items)
             all_bin_cap = bin_cap
     if all_bin_cap is not None:
-        first_fit(all_items, all_bin_cap)
+        next_fit(all_items, all_bin_cap)
 
-def print_first(calc_first_fit): # debug
-    print("Printing First-Fit results:")
-    for i, bin in enumerate(calc_first_fit, start=1):
+def print_next(calc_next_fit): # debug
+    print("Printing Next-Fit results:")
+    for i, bin in enumerate(calc_next_fit, start=1):
         print(f"Bin {i}: {bin}")
 
 
 def print_best(calc_best_fit): # debug
-    print("Printing First-Fit results:")
+    print("Printing Best-Fit results:")
     for i, bin in enumerate(calc_best_fit, start=1):
         print(f"Bin {i}: {bin}")

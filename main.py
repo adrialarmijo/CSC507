@@ -2,50 +2,31 @@ import rt_processing
 
 def main():
     # ------- Change Me -----------
-    n = 5000
+    n = 10000000
+    files = ["nums.txt", "nums_2.txt", "nums_3.txt", "nums_4.txt", "nums_5.txt"]
+    chunk_sizes = [1, 10, 2, 5, 20]
     # -----------------------------
-    
-    file_1 = "nums.txt"
-    file_2 = "nums_2.txt"
-    file_3 = "nums_3.txt"
-    file_4 = "nums_4.txt"
-    file_5 = "nums_5.txt"
 
-    print("Beginning exercise 1: standard run...")
-    print("Generating", file_1,"with", n,"rows..")
-    rt_processing.write_num_to_file(file_1, n)
-    time_elapsed_1 = rt_processing.standard_run(file_1)
-    
-    print("Beginning exercise 2: split into 10 file chunks...")
-    print("Generating", file_2,"with", n,"rows..")
-    rt_processing.write_num_to_file(file_2, n)
-    exercise_num = "2"
-    chunks = 10
-    time_elapsed_2 = rt_processing.split_by_chunk_size(file_2, chunks, exercise_num)
+    fastest_time = float('inf')
+    fastest_exercise = None
 
-    print("Beginning exercise 3: split into 10 file chunks...")
-    print("Generating", file_3,"with", n,"rows..")
-    rt_processing.write_num_to_file(file_3, n)
-    exercise_num = "3"
-    chunks = 2
-    time_elapsed_3 = rt_processing.split_by_chunk_size(file_3, chunks, exercise_num)
+    for i in range(len(files)):
+        print(f"Beginning exercise {i+1}: split into {chunk_sizes[i]} file chunks...")
+        print(f"Generating {files[i]} with {n} rows..")
+        exercise_num = str(i+1)
 
-    print("Beginning exercise 4: split into 10 file chunks...")
-    print("Generating", file_4,"with", n,"rows..")
-    rt_processing.write_num_to_file(file_4, n)
-    exercise_num = "4"
-    chunks = 5
-    time_elapsed_4 = rt_processing.split_by_chunk_size(file_4, chunks, exercise_num)
+        if i == 0:
+            rt_processing.write_num_to_file(files[i], n, chunk_sizes[i])
+            time_elapsed = rt_processing.standard_run(files[i])
+        else:
+            rt_processing.write_num_to_file(files[i], n, chunk_sizes[i])
+            time_elapsed = rt_processing.split_by_chunk_size(files[i], chunk_sizes[i], exercise_num)
 
-    print("Beginning exercise 5: split into 10 file chunks...")
-    print("Generating", file_5,"with", n,"rows..")
-    rt_processing.write_num_to_file(file_5, n)
-    exercise_num = "5"
-    chunks = 20
-    time_elapsed_5 = rt_processing.split_by_chunk_size(file_5, chunks, exercise_num)
+        if time_elapsed < fastest_time:
+            fastest_time = time_elapsed
+            fastest_exercise = i + 1
 
-    fastest_time = min(time_elapsed_1, time_elapsed_2, time_elapsed_3, time_elapsed_4, time_elapsed_5)
-    print("Of the 5 exercises, the fastest time was", fastest_time, "second(s)")
+    print("Of the 5 exercises, the fastest time was exercise", fastest_exercise, "at", fastest_time, "second(s)")
 
 if __name__ == '__main__':
     main()    
