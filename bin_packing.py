@@ -1,5 +1,5 @@
 # This python module mimics processing data within the OS into static and heap memory.
-# Using the bin-packing problem, both the best-fit and first-fit algorithms are tested.
+# Using the bin-packing problem, the best-fit, next-fit, and first-fit algorithms are tested.
 # In most cases, the next-fit algorithm performs better, with a worst-case time complexity
 # of O(nb^2). First-fit & Best-fit has its uses, but is currently not optimal for this project.
 
