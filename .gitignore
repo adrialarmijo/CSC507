@@ -1,3 +1,8 @@
+# Specific directories and files
+chunked_files/
+hugefile*.txt
+totalfile*.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

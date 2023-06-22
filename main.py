@@ -1,30 +1,45 @@
-# CSC507 - Portfolio Project
-# Adrial Armijo
-# ------- Prompt ------------------------------------------------------------------------------------------
-# Create a program, using a programming language of your choice, to produce a new file: totalfile.txt, 
-# by taking the numbers from each line of hugefile1.txt and hugefile2.txt and adding them. 
-# So, each line in totalfile.txt is the sum of the corresponding line in hugefile1.txt and hugefile2.txt.
-# Create two programs, where one program reads the first half of the files, and another 
-# program reads the second half. Use the OS to launch both programs simultaneously.
-# Lastly, break up hugefile1.txt and hugefile2.txt into 10 files each, and run your process on all 10 sets
-# in parallel. How do the run times compare to the original process?
-# ----------------------------------------------------------------------------------------------------------
+"""
+-------------------------------------------------------------------------------------------------
+CSC507 - Portfolio Project, by Adrial Armijo
+-------------------------------------------------------------------------------------------------
+Main Module
+===========
 
-# import rt_processing
-import big_data
+This module serves as the entry point to the application.
+
+Usage:
+    python main.py
+
+Description:
+    The `main.py` script is responsible for processing big data files using the `process_big_data` module.
+    It performs the following steps:
+    1. Defines the input file paths and output file paths.
+    2. Calls the relevant functions from the `process_big_data` module to process the files.
+    3. Prints relevant messages to track the progress of file processing.
+
+    Make sure to update the following variables in the code section marked 'Change Me' according to your requirements:
+    - `in_files`: A list of input file paths, specifically the very large files.
+    - `out_file1`: Path to the output file for the first processing step.
+    - `out_file2`: Path to the output file for the second processing step.
+
+    Please ensure that the input file paths and output file paths are correctly specified before running the script.
+
+"""
+import process_big_data
 
 def main():
     # ------- Change Me -----------
-    in_files = ["hugefile1.txt", "hugefile2.txt"]
-    out_files = ["totalfile1.txt", "totalfile2.txt"]
+    huge_in_files = ["hugefile1.txt", "hugefile2.txt"]
+    small_in_files = ["small_file.txt", "smallfile2.txt"] # debug / troubleshoot
+    out_file1 = "totalfile1.txt"
+    out_file2 = "totalfile2.txt"
     # -----------------------------
-
-    fastest_time = float('inf')
-
-    for file, output_file in zip(in_files, out_files):
-        big_data.run_simultaneously(file, output_file)
-        big_data.run_in_parallel(file)
-
+    
+    print("Begin processing files...")
+    file_paths_str = ",".join(huge_in_files) # set delimiter for argument serialization
+    process_big_data.run_simultaneously(file_paths_str, out_file1)
+    #process_big_data.run_in_parallel(file_paths_str, out_file2)
+     
 
 if __name__ == '__main__':
     main()    
